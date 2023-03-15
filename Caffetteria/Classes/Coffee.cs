@@ -18,12 +18,6 @@ namespace Caffetteria.Classes
         public List<Topping> toppings = new List<Topping>();
         public Service service;
 
-        public Coffee() {
-
-             
-
-        }
-
         public double CalculatePrice()
         {
             Calculations calculation = new Calculations(this);
