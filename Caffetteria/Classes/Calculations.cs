@@ -14,6 +14,7 @@ namespace Caffetteria.Classes
     {
         public decimal FinalCalculation;
         public decimal FinalPrice;
+
         Constants constants = new Constants();
         public Calculations(Coffee coffee) 
         {
@@ -25,10 +26,12 @@ namespace Caffetteria.Classes
             if(coffee.name == Name.Espresso)
             {
                 FinalPrice += constants.espresso;
-            }else if (coffee.name == Name.LatteMacciato)
+            }
+            else if (coffee.name == Name.LatteMacciato)
             {
                 FinalPrice += constants.lattemachiato;
-            } else if (coffee.name == Name.Espresso)
+            }
+            else if (coffee.name == Name.Espresso)
             {
                 FinalPrice += constants.cappuccino;
             }
@@ -66,7 +69,7 @@ namespace Caffetteria.Classes
         }
         public decimal CalculatePriceByService(Coffee coffee)
         {
-            //CalculateByToppings(coffee);
+
             if (coffee.service == Service.TakeAway)
             {
                 FinalPrice = FinalPrice + 2 * FinalPrice / 100;

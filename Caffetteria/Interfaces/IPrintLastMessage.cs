@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Caffetteria.Interfaces
 {
-    public interface IPrintMessage
+    public interface IPrintLastMessage
     {
         public void printLastMessage(ICoffee coffee);
     }

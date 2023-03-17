@@ -14,10 +14,11 @@ namespace Caffetteria.Classes
         public static void Main(string[] args)
         {
             ICoffee coffee = Factory.CreateCoffee();
-            PrintLastMessage printLastMessage = Factory.CreatePrintLastMessage();
-            PrintErrorMessage printError = Factory.CreatePrintErrorMessage();
+            IPrintLastMessage printLastMessage = Factory.CreatePrintLastMessage();
+            IPrintErrorMessage printError = Factory.CreatePrintErrorMessage();
 
             bool terminate = true;
+
             Console.WriteLine("Press 1 for Espresso\n" +
                               "Press 2 for Latte Macchiato\n" +
                               "Press 3 for Cappucino.\n");

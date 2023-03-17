@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Caffetteria.Prints
 {
-    public class PrintLastMessage : IPrintMessage
+    public class PrintLastMessage : IPrintLastMessage
     {
         public void printLastMessage(ICoffee coffee)
         {
