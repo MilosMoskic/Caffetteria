@@ -66,7 +66,7 @@ namespace Caffetteria.Classes
         }
         public decimal CalculatePriceByService(Coffee coffee)
         {
-            //CalculateByToppings(coffee);
+
             if (coffee.service == Service.TakeAway)
             {
                 FinalPrice = FinalPrice + 2 * FinalPrice / 100;
