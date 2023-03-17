@@ -9,21 +9,23 @@ using Type = Caffetteria.Data.Type;
 
 namespace Caffetteria.Classes
 {
-    public class Coffee
+    public class Coffee : ICoffee
     {
-        public Name name;
-        public Type type;
-        public Topping topping;
-        public double price = 0;
-        public List<Topping> toppings = new List<Topping>();
-        public Service service;
+        public Name name { get; set; }
+        public Type type { get; set; }
+        public Topping topping { get; set; }
+        public decimal price { get; set; }
 
-        public double CalculatePrice()
+        public List<Topping> toppings { get; set; } = new List<Topping>();
+        public Service service { get; set; }
+
+        public decimal CalculatePrice()
         {
             Calculations calculation = new Calculations(this);
             return calculation.FinalCalculation;
         }
 
-        
+
+
     }
 }

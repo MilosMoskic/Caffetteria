@@ -1,4 +1,6 @@
 ﻿using Caffetteria.Data;
+using Caffetteria.Interfaces;
+using Caffetteria.Prints;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +13,14 @@ namespace Caffetteria.Classes
     {
         public static void Main(string[] args)
         {
-            Coffee coffee = new Coffee();
+            ICoffee coffee = Factory.CreateCoffee();
+            PrintLastMessage printLastMessage = Factory.CreatePrintLastMessage();
+            PrintErrorMessage printError = Factory.CreatePrintErrorMessage();
+
             bool terminate = true;
             Console.WriteLine("Press 1 for Espresso\n" +
-                 "Press 2 for Latte Macchiato\n" +
-                 "Press 3 for Cappucino.\n");
+                              "Press 2 for Latte Macchiato\n" +
+                              "Press 3 for Cappucino.\n");
             while (terminate)
             {
                 string key = Console.ReadLine();
@@ -23,16 +28,19 @@ namespace Caffetteria.Classes
                 switch (key)
                 {
                     case "1":
-                        coffee.name = Data.Name.Espresso;
+                        coffee.name = Name.Espresso;
                         terminate = false;
                         break;
                     case "2":
-                        coffee.name = Data.Name.LatteMacciato;
+                        coffee.name = Name.LatteMacciato;
                         terminate = false;
                         break;
                     case "3":
-                        coffee.name = Data.Name.Cappuccino;
+                        coffee.name = Name.Cappuccino;
                         terminate = false;
+                        break;
+                    default:
+                        printError.printError();
                         break;
                 }
             }
@@ -55,6 +63,9 @@ namespace Caffetteria.Classes
                         coffee.type = Data.Type.Large;
                         terminate = false;
                         break;
+                    default:
+                        printError.printError();
+                        break;
                 }
             }
 
@@ -74,16 +85,19 @@ namespace Caffetteria.Classes
                 switch (key)
                 {
                     case "1":
-                        coffee.toppings.Add(Data.Topping.Milk);
+                        coffee.toppings.Add(Topping.Milk);
                         terminate = false;
                         break;
                     case "2":
-                        coffee.toppings.Add(Data.Topping.Cinnamon);
+                        coffee.toppings.Add(Topping.Cinnamon);
                         terminate = false;
                         break;
                     case "3":
-                        coffee.toppings.Add(Data.Topping.BrownSugar);
+                        coffee.toppings.Add(Topping.BrownSugar);
                         terminate = false;
+                        break;
+                    default:
+                        printError.printError();
                         break;
                 }
             }
@@ -91,7 +105,7 @@ namespace Caffetteria.Classes
             terminate = true;
 
             Console.WriteLine("\nPress 1 for In House\n" +
-                             "Press 2 for Take Away\n");
+                              "Press 2 for Take Away\n");
             while (terminate)
             {
                 string key = Console.ReadLine();
@@ -99,12 +113,15 @@ namespace Caffetteria.Classes
                 switch (key)
                 {
                     case "1":
-                        coffee.service = Data.Service.InHouse;
+                        coffee.service = Service.InHouse;
                         terminate = false;
                         break;
                     case "2":
-                        coffee.service = Data.Service.TakeAway;
+                        coffee.service = Service.TakeAway;
                         terminate = false;
+                        break;
+                    default:
+                        printError.printError();
                         break;
                 }
             }
@@ -112,7 +129,7 @@ namespace Caffetteria.Classes
             terminate = true;
 
             Console.WriteLine("\nPress 1 if you have Coupon Code.\n" +
-                                "Press 2 if you have Coupon Code.\n");
+                              "Press 2 if you don't have Coupon Code.\n");
             while (terminate)
             {
                 string key = Console.ReadLine();
@@ -120,22 +137,19 @@ namespace Caffetteria.Classes
                 switch (key)
                 {
                     case "1":
-                        coffee.service = Data.Service.CouponCode;
+                        coffee.service = Service.CouponCode;
                         terminate = false;
                         break;
                     case "2":
                         terminate = false;
                         break;
+                    default:
+                        printError.printError();
+                        break;
                 }
             }
 
-
-
-            Console.WriteLine($"Coffee Name: {coffee.name}\n" +
-                              $"Coffee Type: {coffee.type}\n" +
-                              $"Coffee Toppings: {coffee.toppings}\n" +
-                              $"Coffee Service: {coffee.service}\n" +
-                              $"Total Cost: {coffee.CalculatePrice()}");
+            printLastMessage.printLastMessage(coffee);
         }
     }
 }

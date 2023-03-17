@@ -10,62 +10,61 @@ using Type = Caffetteria.Data.Type;
 
 namespace Caffetteria.Classes
 {
-    public class Calculations : ICoffee
+    public class Calculations : ICalculations
     {
-        public double FinalCalculation;
-        public double FinalPrice; 
+        public decimal FinalCalculation;
+        public decimal FinalPrice;
+        Constants constants = new Constants();
         public Calculations(Coffee coffee) 
         {
             FinalCalculation = CalculateFinalPrice(coffee);
         }
-        public double CalculatePriceByName(Coffee coffee)
+        public decimal CalculatePriceByName(Coffee coffee)
         {
 
             if(coffee.name == Name.Espresso)
             {
-                FinalPrice += 1.0;
-            }else if (coffee.name == Name.Espresso)
+                FinalPrice += constants.espresso;
+            }else if (coffee.name == Name.LatteMacciato)
             {
-                FinalPrice += 2.0;
+                FinalPrice += constants.lattemachiato;
             } else if (coffee.name == Name.Espresso)
             {
-                FinalPrice += 3.0;
+                FinalPrice += constants.cappuccino;
             }
 
             return FinalPrice;
         }
 
-        public double CalculateByType(Coffee coffee)
+        public decimal CalculateByType(Coffee coffee)
         {
-            //CalculatePriceByName(coffee);
             if (coffee.type == Type.Large)
             {
-                FinalPrice += 0.7;
+                FinalPrice += constants.large;
             }
             return FinalPrice;
         }
 
-        public double CalculateByToppings(Coffee coffee)
+        public decimal CalculateByToppings(Coffee coffee)
         {
-            //CalculateByType(coffee);
             foreach (var item in coffee.toppings)
             {
                 if (item == Topping.Milk)
                 {
-                    FinalPrice += 0.1;
+                    FinalPrice += constants.milk;
                 }
                 else if (item == Topping.Cinnamon)
                 {
-                    FinalPrice += 0.2;
+                    FinalPrice += constants.cinnamon;
                 }
                 else if (item == Topping.BrownSugar)
                 {
-                    FinalPrice += 0.3;
+                    FinalPrice += constants.brownsugar;
                 }
             }
             return FinalPrice;
         }
-        public double CalculatePriceByService(Coffee coffee)
+        public decimal CalculatePriceByService(Coffee coffee)
         {
             //CalculateByToppings(coffee);
             if (coffee.service == Service.TakeAway)
@@ -80,9 +79,9 @@ namespace Caffetteria.Classes
             return FinalPrice;
         }
 
-        public double CalculateFinalPrice(Coffee c)
+        public decimal CalculateFinalPrice(Coffee coffee)
         {
-            var final = CalculatePriceByName(c) + CalculateByType(c) + CalculateByToppings(c) + CalculatePriceByService(c);
+            var final = CalculatePriceByName(coffee) + CalculateByType(coffee) + CalculateByToppings(coffee) + CalculatePriceByService(coffee);
             return final; 
         }
     }
